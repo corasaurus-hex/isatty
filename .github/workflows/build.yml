@@ -11,8 +11,14 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: enable powershell
+        run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+      - name: install scoop
+        run: Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
       - name: add extras bucket to scoop
         run: scoop bucket add extras
+      - name: install winpty
+        run: scoop install winpty
 
   build-ubuntu:
 
