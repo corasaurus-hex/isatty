@@ -47,9 +47,9 @@ jobs:
       - name: set JANET_HEADERPATH
         run: echo "JANET_HEADERPATH=janet-${{ steps.janet-ver.outputs.tag }}-windows-x64" >> $GITHUB_ENV
       - name: install dependencies
-        run: .\${{ steps.janet-ver.outputs.tag }}-windows-x64\janet .\${{ steps.janet-ver.outputs.tag }}-windows-x64\jpm deps
+        run: .\janet-${{ steps.janet-ver.outputs.tag }}-windows-x64\janet .\janet-${{ steps.janet-ver.outputs.tag }}-windows-x64\jpm deps
       - name: run tests
-        run: ~\scoop\shims\winpty .\${{ steps.janet-ver.outputs.tag }}-windows-x64\janet .\${{ steps.janet-ver.outputs.tag }}-windows-x64\jpm test
+        run: ~\scoop\shims\winpty .\janet-${{ steps.janet-ver.outputs.tag }}-windows-x64\janet .\janet-${{ steps.janet-ver.outputs.tag }}-windows-x64\jpm test
 
   build-ubuntu:
 
