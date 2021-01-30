@@ -42,4 +42,4 @@ jobs:
     - name: install dependencies
       run: /usr/bin/env jpm deps
     - name: run tests
-      run: /usr/bin/env jpm test
+      run: /usr/bin/env unbuffer jpm test
