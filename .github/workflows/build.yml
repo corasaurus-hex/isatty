@@ -17,8 +17,39 @@ jobs:
         run: Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
       - name: add extras bucket to scoop
         run: ~\scoop\shims\scoop bucket add extras
+      - name: install unzip
+        run: ~\scoop\shims\scoop install unzip
       - name: install winpty
-        run: scoop install winpty
+        run: ~\scoop\shims\scoop install winpty
+      - name: checkout project
+        uses: actions/checkout@v2
+        with:
+          submodules: false
+      - name: find latest version of janet
+        uses: oprypin/find-latest-tag@v1
+        with:
+          repository: janet-lang/janet
+          releases-only: true
+          prefix: 'v'
+        id: janet-ver
+      - name: download janet
+        run: curl -LO https://github.com/janet-lang/janet/releases/download/${{ steps.janet-ver.outputs.tag }}/janet-${{ steps.janet-ver.outputs.tag }}-windows-x64.zip
+      - name: extract janet
+        run: unzip janet-${{ steps.janet-ver.outputs.tag }}-windows-x64.zip
+      - name: add directory to path
+        run: echo "janet-${{ steps.janet-ver.outputs.tag }}-windows-x64" >> $GITHUB_PATH
+      - name: make modules directory
+        run: mkdir modules
+      - name: set JANET_PATH
+        run: echo "JANET_PATH=modules" >> $GITHUB_ENV
+      - name: set JANET_LIBPATH
+        run: echo "JANET_LIBPATH=janet-${{ steps.janet-ver.outputs.tag }}-windows-x64" >> $GITHUB_ENV
+      - name: set JANET_HEADERPATH
+        run: echo "JANET_HEADERPATH=janet-${{ steps.janet-ver.outputs.tag }}-windows-x64" >> $GITHUB_ENV
+      - name: install dependencies
+        run: jpm deps
+      - name: run tests
+        run: winpty jpm test
 
   build-ubuntu:
 
