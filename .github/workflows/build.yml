@@ -36,8 +36,6 @@ jobs:
         run: curl -LO https://github.com/janet-lang/janet/releases/download/${{ steps.janet-ver.outputs.tag }}/janet-${{ steps.janet-ver.outputs.tag }}-windows-x64.zip
       - name: extract janet
         run: unzip janet-${{ steps.janet-ver.outputs.tag }}-windows-x64.zip -d janet
-      - name: add directory to path
-        run: echo "janet" >> $GITHUB_PATH
       - name: make modules directory
         run: mkdir modules
       - name: install dependencies
@@ -47,7 +45,7 @@ jobs:
           JANET_LIBPATH: .\janet
           JANET_HEADERPATH: .\janet
       - name: run tests
-        run: ~\scoop\shims\winpty .\janet\janet.exe .\janet\jpm test
+        run: winpty .\janet\janet.exe .\janet\jpm test
         env:
           JANET_PATH: .\modules
           JANET_LIBPATH: .\janet
