@@ -16,7 +16,7 @@ jobs:
       - name: install scoop
         run: Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
       - name: add extras bucket to scoop
-        run: scoop bucket add extras
+        run: ~\scoop\shims\scoop bucket add extras
       - name: install winpty
         run: scoop install winpty
 
