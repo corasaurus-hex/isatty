@@ -7,7 +7,14 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: add extras bucket to scoop
+        run: scoop bucket add extras
+
+  build-ubuntu:
 
     runs-on: ubuntu-latest
 
