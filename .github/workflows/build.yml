@@ -35,21 +35,21 @@ jobs:
       - name: download janet
         run: curl -LO https://github.com/janet-lang/janet/releases/download/${{ steps.janet-ver.outputs.tag }}/janet-${{ steps.janet-ver.outputs.tag }}-windows-x64.zip
       - name: extract janet
-        run: unzip janet-${{ steps.janet-ver.outputs.tag }}-windows-x64.zip -d janet-${{ steps.janet-ver.outputs.tag }}-windows-x64
+        run: unzip janet-${{ steps.janet-ver.outputs.tag }}-windows-x64.zip -d janet
       - name: add directory to path
-        run: echo "janet-${{ steps.janet-ver.outputs.tag }}-windows-x64" >> $GITHUB_PATH
+        run: echo "janet" >> $GITHUB_PATH
       - name: make modules directory
         run: mkdir modules
       - name: set JANET_PATH
         run: echo "JANET_PATH=modules" >> $GITHUB_ENV
       - name: set JANET_LIBPATH
-        run: echo "JANET_LIBPATH=janet-${{ steps.janet-ver.outputs.tag }}-windows-x64" >> $GITHUB_ENV
+        run: echo "JANET_LIBPATH=janet" >> $GITHUB_ENV
       - name: set JANET_HEADERPATH
-        run: echo "JANET_HEADERPATH=janet-${{ steps.janet-ver.outputs.tag }}-windows-x64" >> $GITHUB_ENV
+        run: echo "JANET_HEADERPATH=janet" >> $GITHUB_ENV
       - name: install dependencies
-        run: .\janet-${{ steps.janet-ver.outputs.tag }}-windows-x64\janet .\janet-${{ steps.janet-ver.outputs.tag }}-windows-x64\jpm deps
+        run: .\janet\janet.exe .\janet\jpm deps
       - name: run tests
-        run: ~\scoop\shims\winpty .\janet-${{ steps.janet-ver.outputs.tag }}-windows-x64\janet .\janet-${{ steps.janet-ver.outputs.tag }}-windows-x64\jpm test
+        run: ~\scoop\shims\winpty .\janet\janet.exe .\janet\jpm test
 
   build-ubuntu:
 
