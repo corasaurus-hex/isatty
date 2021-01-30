@@ -12,7 +12,7 @@ static Janet ttycheck(int32_t argc, Janet *argv) {
     FILE *file = janet_getfile(argv, 0, NULL);
     int fd = fileno(file);
 #ifdef JANET_WINDOWS
-    return janet_wrap_boolean(_isatty(fd);
+    return janet_wrap_boolean(_isatty(fd));
 #else
     return janet_wrap_boolean(isatty(fd));
 #endif
