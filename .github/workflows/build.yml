@@ -44,6 +44,8 @@ jobs:
           JANET_PATH: .\modules
           JANET_LIBPATH: .\janet
           JANET_HEADERPATH: .\janet
+      - name: get winpty help
+        run: winpty -h
       - name: run tests
         run: winpty -Xallow-non-tty .\janet\janet.exe .\janet\jpm test
         env:
