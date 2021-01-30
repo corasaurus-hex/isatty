@@ -19,7 +19,7 @@ static Janet ttycheck(int32_t argc, Janet *argv) {
 }
 
 static const JanetReg cfuns[] = {
-    {"isatty", ttycheck, "(isatty/isatty file)\n\nReturns true if file is a tty, false otherwise."},
+    {"isatty?", ttycheck, "(isatty/isatty file)\n\nReturns true if file is a tty, false otherwise."},
     {NULL, NULL, NULL}
 };
 
